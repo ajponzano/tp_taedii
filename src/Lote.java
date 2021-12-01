@@ -46,14 +46,14 @@ public class Lote {
 
     public String toString(){
         return String.format("[Lote] {ID: %s, Fecha: %s, Cantidad: %d, CantidadError: %d, Producto: %d, Proveedor: %s, %%Rechazo: %.2f%%, Estado: %s}",
-                            this.id,
-                            this.fecha,
-                            this.cantidad,
-                            this.cantidadError,
-                            this.producto,
-                            this.proveedor,
-                            this.porcentajeRechazo * 100,
-                            this.estado
+        		this.id,
+        		this.fecha,
+        		this.cantidad,
+        		this.cantidadError,
+        		this.producto,
+        		this.proveedor,
+        		this.porcentajeRechazo * 100,
+        		this.estado
         );
     }
 

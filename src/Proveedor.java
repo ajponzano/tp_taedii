@@ -56,12 +56,20 @@ public class Proveedor {
     public int getLotesTotales() {
     	return lotesAceptados + lotesRechazados;
     }
+    
+    public double getPrcAceptados() {
+    	return (double)lotesAceptados / (double)getLotesTotales() * 100;
+    }
+    
+    public double getPrcRechazados() {
+    	return (double)lotesRechazados / (double)getLotesTotales() * 100;
+    }
 
     public String toString(){
         return String.format("[Proveedor] {ID: %s, Nombre: %s, Lotes Totales: %s, Lotes Aceptados: %s, Lotes Rechazados: %s}",
                 this.id,
                 this.nombre,
-                getLotesTotales(),
+                this.getLotesTotales(),
                 this.lotesAceptados,
         		this.lotesRechazados
         );
