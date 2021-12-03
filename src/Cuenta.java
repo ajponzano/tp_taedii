@@ -1,36 +1,13 @@
-public class Proveedor {
+public class Cuenta {
 
-    private String nombre;
     private int id;
     private int lotesAceptados;
     private int lotesRechazados;
 
-    public Proveedor(int ID){
+    public Cuenta(int ID){
         this.id = ID;
         this.lotesAceptados = 0;
         this.lotesRechazados = 0;
-
-        switch (this.id){
-            case 1:
-                this.nombre = "Terrabusi";
-                break;
-            case 2:
-                this.nombre = "Nestle";
-                break;
-            case 3:
-                this.nombre = "Arcor";
-                break;
-            case 4:
-                this.nombre = "Granix";
-                break;
-            case 5:
-                this.nombre = "Georgalos";
-                break;
-        }
-    }
-
-    public String getNombre() {
-        return nombre;
     }
     
     public int getId() {
@@ -66,9 +43,8 @@ public class Proveedor {
     }
 
     public String toString(){
-        return String.format("[Proveedor] {ID: %s, Nombre: %s, Lotes Totales: %s, Lotes Aceptados: %s, Lotes Rechazados: %s}",
+        return String.format("[Proveedor] {ID: %s, Lotes Totales: %s, Lotes Aceptados: %s, Lotes Rechazados: %s}",
                 this.id,
-                this.nombre,
                 this.getLotesTotales(),
                 this.lotesAceptados,
         		this.lotesRechazados

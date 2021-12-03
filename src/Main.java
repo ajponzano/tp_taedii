@@ -1,3 +1,4 @@
+import java.util.Hashtable;
 import java.util.Scanner;
 
 public class Main {
@@ -5,9 +6,12 @@ public class Main {
 	private static Scanner keyboard;
 	private static Lote[] lotes;
 	private static AVL ranking = new AVL();
+	private static Hashtable<Integer, String> proveedores = new Hashtable<Integer, String>();
+	private static Hashtable<Integer, String> productos = new Hashtable<Integer, String>();
 
 	Main() {
 		keyboard = new Scanner(System.in);
+		cargarDatosEstaticos();
 		menuOptions();
 	}
 
@@ -57,10 +61,6 @@ public class Main {
 		System.out.println("-----------------------------------------");
 	}
 
-	public static void main (String args[]) {
-		new Main();
-	}
-
 	private static Lote[] generarLotes(int lotesMax) {
 		Lote[] lotes = new Lote[lotesMax];
 
@@ -74,28 +74,46 @@ public class Main {
 	}
 
 	private static void analizarDatos(Lote[] lotes) {
-		Proveedor[] proveedores = new Proveedor[5];
+		Cuenta[] cuentas = new Cuenta[5];
 
-		// Inicializar lista de proveedores
+		// Inicializar cuentas de proveedores
 		for (int i=0; i<5; i++) {
-			proveedores[i] = new Proveedor(i+1);
+			cuentas[i] = new Cuenta(i+1);
 		}
 
 		// Contar lotes según proveedor
 		for (int i=0; i<lotes.length; i++) {
 			if (lotes[i].getPorcentajeRechazo() < 0.2) {
-				proveedores[lotes[i].getProveedor()-1].incrementLotesRechazados();
+				cuentas[lotes[i].getProveedor()-1].incrementLotesRechazados();
 			}
 			else {
-				proveedores[lotes[i].getProveedor()-1].incrementLotesAceptados();
+				cuentas[lotes[i].getProveedor()-1].incrementLotesAceptados();
 			}
 		}
 
 		// Rankear
 		for (int i=0; i<5; i++) {
 			//System.out.print(proveedores[i].toString());
-			//System.out.println(" " + proveedores[i].getNombre() + " " + String.format("%.2f", proveedores[i].getPrcAceptados()));
-			ranking.insertar(proveedores[i].getPrcAceptados(), proveedores[i].getNombre());
+			//System.out.println(" " + proveedores.get(i+1) + " " + String.format("%.2f", proveedores[i].getPrcAceptados()));
+			ranking.insertar(cuentas[i].getPrcAceptados(), proveedores.get(i+1));
 		}
+	}
+
+	private static void cargarDatosEstaticos() {
+		proveedores.put(1, "Terrabusi");
+		proveedores.put(2, "Nestle");
+		proveedores.put(3, "Arcor");
+		proveedores.put(4, "Granix");
+		proveedores.put(5, "Georgalos");
+		productos.put(1, "Galletitas");
+		productos.put(2, "Barras Cereal");
+		productos.put(3, "Dulce");
+		productos.put(4, "Cafe");
+		productos.put(5, "Alfajor");
+		productos.put(6, "Caramelos");
+	}
+
+	public static void main (String args[]) {
+		new Main();
 	}
 }
